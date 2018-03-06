@@ -67,10 +67,10 @@ extension TextBoxView: UITextFieldDelegate {
             if range.location != numberLabels.count - 1 {
                 unfocus(label: numberLabels[range.location + 1])
             }
-            numberLabels[range.location].layer.borderColor = UIColor.red.cgColor
+            focus(label: numberLabels[range.location])
         } else if !backspacePressed && range.location != numberLabels.count - 1 {
-            numberLabels[range.location].layer.borderColor = UIColor.gray.cgColor
-            numberLabels[range.location + 1].layer.borderColor = UIColor.red.cgColor
+            unfocus(label: numberLabels[range.location])
+            focus(label: numberLabels[range.location + 1])
         }
         
         return true
