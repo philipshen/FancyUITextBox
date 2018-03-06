@@ -59,18 +59,19 @@ extension TextBoxView: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if string.count + textField.text!.count > numberLabels.count { return false }
         
-        numberLabels[range.location].text = string
+        let index = range.location
+        numberLabels[index].text = string
         
         // Styling to represent focus
         let backspacePressed = string == ""
         if backspacePressed {
-            if range.location != numberLabels.count - 1 {
-                unfocus(label: numberLabels[range.location + 1])
+            if index != numberLabels.count - 1 {
+                unfocus(label: numberLabels[index + 1])
             }
-            focus(label: numberLabels[range.location])
-        } else if !backspacePressed && range.location != numberLabels.count - 1 {
-            unfocus(label: numberLabels[range.location])
-            focus(label: numberLabels[range.location + 1])
+            focus(label: numberLabels[index])
+        } else if !backspacePressed && index != numberLabels.count - 1 {
+            unfocus(label: numberLabels[index])
+            focus(label: numberLabels[index + 1])
         }
         
         return true
